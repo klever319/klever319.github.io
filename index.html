@@ -3,13 +3,13 @@
   <head>
     <title>Title</title>
     <meta name="description" content="My first page">
-  </head> 
+  </head>
   <body>
-    <form id="paymentFormSample" autocomplete="off" method='POST' action='https://demo.paykeeper.ru/create/' accept-charset="utf-8">
+    <form id="paymentFormSample" autocomplete="off" method='POST' action='https://api.cloudpayments.ru/payments/cards/charge' accept-charset="utf-8">
      Введите сумму оплаты: 
      <input type='text' name='sum' value='100'/> <br/>
      Введите номер заказа: 
-     <input type='text' name='orderid' value='123456'/> <br />
+     <input type='text' name='orderid' value=' 123456'/> <br />
      Введите название услуги: 
      <input type='text' name='service_name' value='Тестовая оплата'/> <br />
      <input type='submit' value='Перейти к оплате' /> <br/> <br/>

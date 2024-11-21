@@ -33,6 +33,7 @@
     <script src="https://checkout.cloudpayments.ru/checkout.js">
       const checkout = new cp.Checkout({
         publicId: 'pk_aff17de359b486f45c12b4e4fdab0',
+        APISecret: '161e5df19cdff1a23a01f76be4346ce9'
         container: document.getElementById("paymentFormSample")
       });
       checkout.createPaymentCryptogram()

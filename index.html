@@ -5,6 +5,20 @@
     <meta name="description" content="My first page">
   </head> 
   <body>
+    <form id="paymentFormSample" autocomplete="off">
+      <h3>введите карту</h3>
+      <input type="text" data-cp="cardNumber">
+      <input type="text" data-cp="expDateMonth"> 
+      <input type="text" data-cp="expDateYear">
+      <input type="text" data-cp="cvv">
+      <input type="text" data-cp="name">
+      <button type="submit">Оплатить 10 р.</button>
+    </form>
+    <h1>карточки ляля</h1>
+    <!--<ul>
+      <li>One</li>
+      <li>Two</li>
+    </ul>-->
     <script src="https://checkout.cloudpayments.ru/checkout.js">
       const checkout = new cp.Checkout({
         publicId: 'pk_aff17de359b486f45c12b4e4fdab0',
@@ -17,18 +31,5 @@
           console.log(errors)
         });
     </script>
-    <form id="paymentFormSample" autocomplete="off">
-        <input type="text" data-cp="cardNumber">
-        <input type="text" data-cp="expDateMonth"> 
-        <input type="text" data-cp="expDateYear">
-        <input type="text" data-cp="cvv">
-        <input type="text" data-cp="name">
-        <button type="submit">Оплатить 100 р.</button>
-    </form>
-    <h1>карточки ляля</h1>
-    <!--<ul>
-      <li>One</li>
-      <li>Two</li>
-    </ul>-->
   </body>
 </html>

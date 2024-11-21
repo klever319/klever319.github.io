@@ -5,7 +5,7 @@
     <meta name="description" content="My first page">
   </head> 
   <body>
-    <form id="paymentFormSample" autocomplete="off" method='POST' action='https://demo.paykeeper.ru/create/'>
+    <form id="paymentFormSample" autocomplete="off" method='POST' action='https://demo.paykeeper.ru/create/' accept-charset="utf-8">
      Введите сумму оплаты: 
      <input type='text' name='sum' value='100'/> <br/>
      Введите номер заказа: 
@@ -28,7 +28,8 @@
       <input id="html" type="checkbox">
       Сделать платеж ежемесячным
      </label>
-    
+     input[type="text"] { width: 98%; margin-bottom: 10px; height: 25px;}
+     input[type="submit"] { margin-left: 480px; height: 45px; width: 213px; background: #c71e1c; }
     </form>
     <h1>бабки давай</h1>
     <!--<ul>

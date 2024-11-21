@@ -1,14 +1,12 @@
  <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
-    <meta name="description" content="My first page">
-  </head>
     <meta charset="utf-8">
     <title>Чертов сайт</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link id="faviconLink" rel="icon" type="image/x-icon" href="favicon.ico?v=4">
+  </head>
   <body>
     <form id="paymentFormSample" autocomplete="off" method='POST' action='https://api.cloudpayments.ru/payments/cards/charge' accept-charset="utf-8">
      Введите сумму оплаты: 
@@ -19,7 +17,7 @@
      <input type='text' name='service_name' value='Тестовая оплата'/> <br />
      <input type='submit' value='Перейти к оплате' /> <br/> <br/>
      Введите карту:
-     <input type="text" data-cp="cardNumber"> <br/>
+     <input type="text" data-cp="cardNumber " value=' 123456'> <br/>
      Введите месяц:
      <input type="text" data-cp="expDateMonth"> <br/>
      Введите год:

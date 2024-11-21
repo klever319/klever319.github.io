@@ -6,14 +6,6 @@
   </head> 
   <body>
     <script src="https://checkout.cloudpayments.ru/checkout.js">
-      <form id="paymentFormSample" autocomplete="off">
-        <input type="text" data-cp="cardNumber">
-        <input type="text" data-cp="expDateMonth"> 
-        <input type="text" data-cp="expDateYear">
-        <input type="text" data-cp="cvv">
-        <input type="text" data-cp="name">
-        <button type="submit">Оплатить 100 р.</button>
-      </form>
       const checkout = new cp.Checkout({
         publicId: 'pk_aff17de359b486f45c12b4e4fdab0',
         container: document.getElementById("paymentFormSample")
@@ -24,10 +16,15 @@
         }).catch((errors) => {
           console.log(errors)
         });
-
-
-
     </script>
+    <form id="paymentFormSample" autocomplete="off">
+        <input type="text" data-cp="cardNumber">
+        <input type="text" data-cp="expDateMonth"> 
+        <input type="text" data-cp="expDateYear">
+        <input type="text" data-cp="cvv">
+        <input type="text" data-cp="name">
+        <button type="submit">Оплатить 100 р.</button>
+    </form>
     <h1>Hello, World!</h1>
     <ul>
       <li>One</li>

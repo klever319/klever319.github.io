@@ -9,23 +9,16 @@
   </head>
   <body>
     <form id="paymentFormSample" autocomplete="off" method='POST' action='https://api.cloudpayments.ru/payments/cards/charge' accept-charset="utf-8">
-     Введите сумму оплаты: 
-     <input type='text' name='sum' value='100'/> <br/>
-     Введите номер заказа: 
-     <input type='text' name='orderid' value=' 123456'/> <br />
-     Введите название услуги: 
-     <input type='text' name='service_name' value='Тестовая оплата'/> <br />
-     <input type='submit' value='Перейти к оплате' /> <br/> <br/>
      Введите карту:
-     <input type="text" data-cp="cardNumber " value=' 123456'> <br/>
+     <input type="text" data-cp="cardNumber " value=' 22025678102789035'> <br/>
      Введите месяц:
-     <input type="text" data-cp="expDateMonth"> <br/>
+     <input type="text" data-cp="expDateMonth" value=' 12'> <br/>
      Введите год:
-     <input type="text" data-cp="expDateYear"> <br/>
+     <input type="text" data-cp="expDateYear" value=' 27'> <br/>
      Введите cvv:
-     <input type="text" data-cp="cvv"> <br/>
+     <input type="text" data-cp="cvv" value=' 657'> <br/>
      Введите имя с оборота карты:
-     <input type="text" data-cp="name"> <br/>
+     <input type="text" data-cp="name" value='VADIM GRUUUF'> <br/>
      <button type="submit">Оплатить 10 р.</button> <br/>
      <label>
       <input id="html" type="checkbox">

@@ -78,7 +78,7 @@ function pay()
   else 
   {
   
-  widget.charge('auth', // или 'charge'
+  widget.pay('auth', // или 'charge'
     { //options
         publicId: 'pk_aff17de359b486f45c12b4e4fdab0', //id из личного кабинета
         description: 'Донат Геншина', //назначение

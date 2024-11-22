@@ -48,7 +48,7 @@ function pay()
   }
   }; //создание ежемесячной подписки
 
-  widget.charge('auth', { // options
+  widget.pay('auth', { // options
     publicId: 'pk_aff17de359b486f45c12b4e4fdab0', //id из личного кабинета
     description: 'Ежемесячный донат в Геншине', //назначение
     amount: 10, //сумма

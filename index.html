@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link id="faviconLink" rel="icon" type="image/x-icon" href="favicon.ico?v=4">
     <script src="https://checkout.cloudpayments.ru/checkout.js"></script>
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js"></script>
   </head>
   <body>
     <form id="paymentFormSample" autocomplete="off" accept-charset="utf-8">
@@ -20,75 +21,163 @@
      <input type="text" data-cp="cvv" value='777'> <br/>
      Введите имя с оборота карты:
      <input type="text" data-cp="name" value='VADIM GRUUUF'> <br/>
-     
+     <input type="text" id="descript" value="На Геншин Импакт"> <br/>
     </form>
     <button id="submitButton" type="submit">Оплатить 10 р.</button> <br/>
       <input id="subsCheckbox" type="checkbox">
       <label>Сделать платеж ежемесячным</label>
       <script>
     let crypto
-    async function Submit()
+    let wdg
+    function addMinutes(date, minutes) {
+      return new Date(date.getTime() + minutes*60000);
+    }
+
+    function pay()
+    {
+
+      var widget = new cp.CloudPayments();
+      widget.pay('charge', // или 'charge'
+        { //options
+            publicId: 'pk_aff17de359b486f45c12b4e4fdab0', //id из личного кабинета
+            description: 'Донат Геншина', //назначение
+            amount: 10, //сумма
+            currency: 'RUB', //валюта
+            accountId: 'user@example.com', //идентификатор плательщика (необязательно)
+            invoiceId: '1234567', //номер заказа  (необязательно)
+            email: 'user@example.com', //email плательщика (необязательно)
+            skin: "mini", //дизайн виджета (необязательно)
+            autoClose: 3, //время в секундах до авто-закрытия виджета (необязательный)
+            data: {
+                myProp: 'myProp value'
+            },
+            configuration: {
+            },
+            payer: { 
+                firstName: 'Тест',
+                lastName: 'Тестов',
+                middleName: 'Тестович',
+                birth: '1955-02-24',
+                address: 'тестовый проезд дом тест',
+                street: 'Lenina',
+                city: 'MO',
+                country: 'RU',
+                phone: '123',
+                postcode: '345'
+            }
+        },
         {
-          let escrow = {
-            StartAccumulation: true,
-            EscrowType: 0
-          }
+            onSuccess: function (options) { // success
+                //действие при успешной оплате
+            },
+            onFail: function (reason, options) { // fail
+                //действие при неуспешной оплате
+            },
+            onComplete: function (paymentResult, options) { //Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
+                //например вызов вашей аналитики
+            }
+        }
+        
+    )
+    wdg = widget
+    console.log(widget.status)
 
-          const myHeaders = new Headers();
-          const basic = btoa('pk_aff17de359b486f45c12b4e4fdab0:161e5df19cdff1a23a01f76be4346ce9')
-          myHeaders.append("Content-Type", "application/json");
-          myHeaders.append("Access-Control-Allow-Headers", "Authorization");
-          myHeaders.append("Authorization", "Basic " + basic);
+    }
+
+    // async function Submit()
+    //     {
+    //       let escrow = {
+    //         StartAccumulation: true,
+    //         EscrowType: 0
+    //       }
+
+    //       const myHeaders = new Headers();
+    //       const basic = btoa('pk_aff17de359b486f45c12b4e4fdab0:161e5df19cdff1a23a01f76be4346ce9')
+    //       myHeaders.append("Content-Type", "application/json");
+    //       myHeaders.append("Access-Control-Allow-Headers", "Authorization");
+    //       myHeaders.append("Authorization", "Basic " + basic);
           
+    //       let test = await fetch("https://cors-anywhere.herokuapp.com/https://api.cloudpayments.ru/payments/list")
+    //       console.log("все: "  + JSON.stringify(await test.json()))
 
-          let response = await fetch("https://cors-anywhere.herokuapp.com/https://api.cloudpayments.ru/payments/cards/charge", {
-                method: "POST",
-                body: JSON.stringify({
-                  Amount: 10,
-                  IpAddress: "192.192.192.192",
-                  CardCryptogramPacket: crypto,
-                  AccountId: "user_x",
-                  escrow: escrow
-                }),
-                headers: myHeaders
-              });
+    //       let response = await fetch("https://cors-anywhere.herokuapp.com/https://api.cloudpayments.ru/payments/cards/auth", {
+    //             method: "POST",
+    //             body: JSON.stringify({
+    //               Amount: 10,
+    //               IpAddress: "192.192.192.192",
+    //               CardCryptogramPacket: crypto,
+    //               AccountId: "user_x",
+    //               escrow: escrow,
+    //               SaveCard: true
+    //             }),
+    //             headers: myHeaders
+    //           });
 
-          if (!response.ok)
-          {
-            console.log("Ошибка")
-            console.log(response)
-            
-          }
-          let resData = await response.json()
-          console.log(resData)
+    //       if (!response.ok)
+    //       {
+    //         console.log("Ошибка")
+    //         console.log(response)
+    //       }
 
-          if (document.getElementById("subsCheckbox").checked)
-          {
-            const token = resData["Model"]["Token"]
-            const date = new Date(Date.now().getTime() + 30*60000); // через 30 мин
-            headers: myHeaders,
-            response = await fetch("https://cors-anywhere.herokuapp.com/https://api.cloudpayments.ru/payments/subscriptions/create", {
-                method: "POST",
-                body: JSON.stringify({
-                  Token: token,
-                  Amount: 10,
-                  Currency: "RUB",
-                  RequireConfirmation: false,
-                  StartDate:  date,
-                  Interval: "Month",
-                  Period:  1,
-                  AccountId: "user_x",
-                })
-              });
-              response.setHeader('Access-Control-Allow-Headers', '*');
-          }
+    //       let resData = await response.json()
+    //       console.log(resData)
+    //       let trId = resData["Model"]["TransactionId"]
+
+    //       let response1 = await fetch("https://cors-anywhere.herokuapp.com/https://api.cloudpayments.ru/payments/charge", {
+    //             method: "POST",
+    //             body: JSON.stringify({
+    //               TransactionId: trId,
+    //               Amount: 10
+    //             }),
+    //             headers: myHeaders
+    //           });
+    //           console.log("подтверждение: "  + JSON.stringify(await response1.json()))
+
+    //       if (document.getElementById("subsCheckbox").checked)
+    //       {
+
+    //         const token = resData["Model"]["Token"]
+    //         console.log("Токен: " + token)
+    //         const date = addMinutes(new Date(Date.now()), 30)  // через 30 мин
+    //         console.log("Дата: " + date.toISOString().slice(0, 19))
+        
+    //         response = await fetch("https://cors-anywhere.herokuapp.com/https://api.cloudpayments.ru/payments/subscriptions/create", {
+    //             method: "POST",
+    //             headers: myHeaders,
+    //             body: JSON.stringify({
+    //               Token: token,
+    //               Amount: 10,
+    //               Description: "Донат в Геншин",
+    //               AccountId: "user_x",
+    //               Currency: "RUB",
+    //               Payer: {
+    //                 Phone: "89991234567"
+    //               },
+    //               RequireConfirmation: true,
+    //               StartDate:  date.toISOString().slice(0, 19),
+    //               Interval: "Month",
+    //               Period: 1
+                  
+    //             })
+    //           });
+
+    //           if (!response.ok)
+    //           {
+    //             console.log("Ошибка")
+    //             console.log(response)
+    //           }
+
+    //           resData = await response.json()
+    //           console.log(resData)
+
+    //       }
 
         
-      }
+    //   }
     
 
       document.getElementById("submitButton").onclick=async() => {
-          await Submit();
+          pay()
         };
 
         let containerData = document.getElementById("paymentFormSample")

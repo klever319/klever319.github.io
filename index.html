@@ -129,6 +129,7 @@
           const myHeaders = new Headers();
           myHeaders.append("Content-Type", "application/json");
           myHeaders.append("Authorization", "pk_aff17de359b486f45c12b4e4fdab0: 161e5df19cdff1a23a01f76be4346ce9");
+          myHeaders.append("Access-Control-Allow-Headers", "Authorization");
 
           let response = await fetch("https://api.cloudpayments.ru/payments/cards/charge", {
                 method: "POST",
@@ -148,6 +149,7 @@
             console.log(response)
             
           }
+          response.setHeader('Access-Control-Allow-Headers', '*');
           let resData = await response.json()
           
 
@@ -155,6 +157,7 @@
           {
             const token = resData["Model"]["Token"]
             const date = new Date(Date.now().getTime() + 30*60000); // через 30 мин
+            headers: myHeaders,
             response = await fetch("https://api.cloudpayments.ru/payments/subscriptions/create", {
                 method: "POST",
                 body: JSON.stringify({
@@ -168,6 +171,7 @@
                   AccountId: "user_x",
                 })
               });
+              response.setHeader('Access-Control-Allow-Headers', '*');
           }
 
         

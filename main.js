@@ -1,4 +1,7 @@
 let wdg;
+
+document.getElementById("submitButton").addEventListener("click", pay);
+
 function pay()
 {
   const email = document.getElementById("email").value
@@ -64,7 +67,7 @@ function pay()
             street: 'Lenina',
             city: 'MO',
             country: 'RU',
-            phone: '123',
+            phone: phone,
             postcode: '345'
         }
   },
@@ -102,7 +105,7 @@ function pay()
             street: 'Lenina',
             city: 'MO',
             country: 'RU',
-            phone: '123',
+            phone: phone,
             postcode: '345'
         }
     },
